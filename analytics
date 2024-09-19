@@ -1,0 +1,25 @@
+
+function piEnableTracking(element) {
+	piSetCookie('pi_opt_in893481', 'true', 365);
+	pi.tracker.pi_opt_in = 'true';
+	piTracker();
+	element.parentNode.style.display = 'none';
+}
+function piDisableTracking(element) {
+	piSetCookie('pi_opt_in893481', 'false', 365);
+	piSetCookie('visitor_id893481', '', 365);
+	pi.tracker.pi_opt_in = 'false';
+	pi.tracker.notify_pi = true;
+	piTracker();
+	element.parentNode.style.display = 'none';
+}
+function piResponse() {
+	var body = document.getElementsByTagName("body")[0];
+	var trackingDiv = document.createElement('div');
+	var displaySettings = {"message":"May we use cookies to track your activities? We take your privacy very seriously. Please see our privacy policy for details and any questions.","style":"position: absolute; \ntop: 0pt;\nleft: 0;\nwidth: 100%;\ntext-align: center;\nbackground: #FFFFFF; \ncolor: #000000; \nopacity: 0.8;\nfilter:alpha(opacity=80);\nfont-size: 1em;\npadding: 5px 0pt; \nz-index: 1000;","link_style":"font-size: 1em;"};
+	trackingDiv.innerHTML = '<div id=\'pi_tracking_opt_in_div\' style=\'' + displaySettings.style + '\'>' + displaySettings.message + '<a id=\'pi_tracking_opt_in_yes\' href="#" style=\'' + displaySettings.link_style + '\' onclick=\'piEnableTracking(this); return false;\'>Yes</a> <a id=\'pi_tracking_opt_in_no\' href="#" style=\'' + displaySettings.link_style + '\' onclick=\'piDisableTracking(this); return false;\'>No</a><div>';
+	body.appendChild(trackingDiv);
+}
+piResponse();
+
+
